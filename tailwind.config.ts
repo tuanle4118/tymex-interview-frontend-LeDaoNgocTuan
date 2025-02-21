@@ -12,6 +12,11 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        interSans: "var(--font-inter-sans)",
+        bebasneue: "var(--font-bebas-neue)",
+        tekoSans: "var(--font-teko-sans)",
+      },
     },
   },
   plugins: [],
