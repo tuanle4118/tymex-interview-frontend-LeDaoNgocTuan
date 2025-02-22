@@ -4,7 +4,7 @@ import Mafia from "@/public/characters/mafia-england-character.png";
 import NeonGuy from "@/public/characters/neon-guy-character.png";
 import TheDJ from "@/public/characters/the-DJ-character.png";
 import TheDJTitle from "@/public/characters/the-DJ-title.svg";
-import TagIcon from "@/public/tag-icon.svg";
+import TagIcon from "@/public/icons/tag-icon.svg";
 import YellowBackground from "@/public/yellow-background.svg";
 import { Carousel } from "antd";
 import Image, { StaticImageData } from "next/image";
@@ -58,7 +58,7 @@ function CharacterList() {
   ];
 
   return (
-    <>
+    <div className="w-2/3">
       <div className="hidden h-[10.5rem] w-[15.5rem] lg:block xl:hidden">
         <div className="relative">
           <Carousel
@@ -67,27 +67,20 @@ function CharacterList() {
             pauseOnHover
             className="z-10 border-2 border-solid border-[#FBC625]"
           >
-            {characterList.map((character) => {
-              return (
-                <CharacterGroup
-                  key={character.title}
-                  characterInfo={character}
-                />
-              );
-            })}
+            {characterList.map((character) => (
+              <CharacterGroup key={character.title} characterInfo={character} />
+            ))}
           </Carousel>
           <div className="absolute right-2 top-3 h-[10.5rem] w-[15.5rem] bg-black"></div>
         </div>
       </div>
 
-      <div className="flex h-full w-2/3 flex-col items-start justify-around lg:hidden lg:flex-row lg:items-center xl:flex">
-        {characterList.map((character) => {
-          return (
-            <CharacterGroup key={character.title} characterInfo={character} />
-          );
-        })}
+      <div className="flex h-full w-full flex-col items-start justify-around lg:hidden lg:flex-row lg:items-center xl:flex">
+        {characterList.map((character) => (
+          <CharacterGroup key={character.title} characterInfo={character} />
+        ))}
       </div>
-    </>
+    </div>
   );
 }
 
@@ -100,7 +93,7 @@ function CharacterGroup({
   };
 }) {
   return (
-    <>
+    <div>
       <div className="relative hidden lg:block xl:hidden">
         <div className="relative h-[10.5rem] w-[15.5rem] bg-[url('/characters/character-background.png')] bg-cover bg-center">
           <Image
@@ -132,6 +125,6 @@ function CharacterGroup({
           {characterInfo.title}
         </span>
       </div>
-    </>
+    </div>
   );
 }

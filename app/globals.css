@@ -1,3 +1,79 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.custom-slider {
+  .ant-slider-handle::after {
+    box-shadow: none;
+    border-width: 2px;
+    background-color: transparent;
+    padding: 10px;
+    top: -10px;
+    width: 10px;
+    height: 10px;
+    inset-block-start: -5 !important;
+    inset-inline-start: -3 !important;
+  }
+
+  .ant-slider-track {
+    position: relative;
+    &::before {
+      content: "";
+      background: #da458f;
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      border-radius: 100%;
+      top: -1;
+      left: -4;
+      box-shadow: 0 0 15px 5px #da458f;
+    }
+    &::after {
+      content: "";
+      background: #da458f;
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      border-radius: 100%;
+      right: -4;
+      top: -1;
+      box-shadow: 0 0 15px 5px #da458f;
+    }
+  }
+}
+
+.custom-select {
+  .ant-select-selector {
+    background: transparent !important;
+    box-shadow: none !important;
+    color: white !important; /* Change text color for visibility */
+    border: 1px solid rgb(107 114 128 / var(--tw-border-opacity, 1)) !important;
+    --tw-border-opacity: 1;
+  }
+
+  .ant-select-arrow {
+    color: white !important; /* Make arrow visible */
+  }
+
+  .ant-select-dropdown {
+    background: rgba(0, 0, 0, 0.8) !important; /* Transparent dropdown */
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(10px); /* Glass effect */
+  }
+
+  .ant-select-item {
+    color: white !important;
+  }
+
+  .ant-select-item-option-active {
+    background: rgba(218, 69, 143, 0.5) !important;
+  }
+
+  .ant-select-selection-placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.custom-input .ant-input::placeholder {
+  color: rgba(255, 255, 255, 0.5); /* Light gray placeholder */
+}

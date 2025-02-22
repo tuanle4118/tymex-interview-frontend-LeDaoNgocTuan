@@ -1,9 +1,11 @@
 import {
   InterTight,
-  tekoSans,
   bebasNeueSans,
   interSans,
+  tekoSans,
 } from "@/app/lib/fonts";
+import "@ant-design/v5-patch-for-react-19";
+import { ConfigProvider } from "antd";
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./ui/header";
@@ -19,13 +21,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${interSans.variable} ${InterTight.variable} ${bebasNeueSans.variable} ${tekoSans.variable} antialiased`}
+    <html
+      lang="en"
+      className={`${interSans.variable} ${InterTight.variable} ${bebasNeueSans.variable} ${tekoSans.variable}`}
+    >
+      <ConfigProvider
+        theme={{ token: { fontFamily: "var(--font-inter-sans)" } }}
       >
-        <Header />
-        {children}
-      </body>
+        <body className="font-interSans antialiased">
+          <Header />
+          {children}
+        </body>
+      </ConfigProvider>
     </html>
   );
 }
