@@ -8,7 +8,7 @@ import {
 import { Dropdown } from "antd";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
-import GlowingButton from "@components/glowing-button";
+import GlowingButton from "@/app/components/GlowingButton";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -103,10 +103,10 @@ function MenuList() {
     <Link
       key={item.title}
       href={item.href}
-      className="font-tekoSans hover:from-primary hover:to-secondary group relative text-nowrap text-xl font-semibold text-white transition-all duration-300 hover:bg-gradient-to-r hover:bg-clip-text hover:text-transparent"
+      className="group relative text-nowrap font-tekoSans text-xl font-semibold text-white transition-all duration-300 hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:bg-clip-text hover:text-transparent"
     >
       {item.title}
-      <span className="from-primary to-secondary absolute bottom-0 left-0 h-1 w-0 bg-gray-800 transition-all duration-300 group-hover:w-1/3 group-hover:bg-gradient-to-r"></span>
+      <span className="absolute bottom-0 left-0 h-1 w-0 bg-gray-800 from-primary to-secondary transition-all duration-300 group-hover:w-1/3 group-hover:bg-gradient-to-r"></span>
     </Link>
   ));
 }

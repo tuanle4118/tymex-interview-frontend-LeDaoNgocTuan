@@ -1,5 +1,5 @@
-import TransparentInput from "@/app/components/transparent-input";
-import GlowingButton from "@components/glowing-button";
+import TransparentInput from "@/app/components/TransparentInput";
+import GlowingButton from "@/app/components/GlowingButton";
 import { Col, Divider, Row } from "antd";
 import Image from "next/image";
 import Link from "next/link";

@@ -1,23 +1,15 @@
+import { ProductCategories, ProductThemes, ProductTiers } from "./types";
+
 export interface IProduct {
   id: number;
   title: string;
-  category:
-    | "Upper Body"
-    | "Lower Body"
-    | "Hat"
-    | "Shoes"
-    | "Accessory"
-    | "Legendary"
-    | "Mythic"
-    | "Epic"
-    | "Rare";
+  category: ProductCategories;
   price: number;
   isFavorite: boolean;
   createdAt: number;
-  theme: "Dark" | "Light" | "Colorful" | "Halloween";
-  tier: "Basic" | "Premium" | "Deluxe";
+  theme: ProductThemes;
+  tier: ProductTiers;
   imageId: number;
-  imageSrc: string;
   author: IAuthor;
 }
 
@@ -28,4 +20,14 @@ export interface IAuthor {
   gender: string;
   avatar: string;
   onlineStatus: string;
+}
+
+export interface IFilterProduct {
+  search: string;
+  tier: string;
+  theme: string;
+  time: string;
+  price: string;
+  priceRange: number[];
+  page: number;
 }

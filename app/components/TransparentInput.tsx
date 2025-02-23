@@ -10,7 +10,7 @@ export default function TransparentInput({
 }: {
   value?: string;
   placeholder?: string;
-  onChange?: (event: ChangeEvent) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   prefix?: ReactNode;
   className?: string;
 }) {
