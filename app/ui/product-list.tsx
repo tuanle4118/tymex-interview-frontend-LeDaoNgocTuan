@@ -101,7 +101,7 @@ export default function ProductList() {
       );
       setIsLoadMore(false);
     }
-  }, [data, isLoadMore]);
+  }, [data]);
 
   if (error) {
     return <div className="w-full text-center text-white">Error occurs</div>;
