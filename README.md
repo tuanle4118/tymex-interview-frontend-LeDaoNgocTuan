@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📦 Marketplace App
 
-## Getting Started
+A modern Marketplace web application built with Next.js, Ant Design, and SWR. It features advanced filtering, search functionality, and a fully responsive UI for mobile, tablet, and desktop users.
 
-First, run the development server:
+⚠️ **Best Viewed on 1920x1080 Resolution**  
+For the best experience, use a screen resolution of **1920x1080**. The design is optimized for this resolution but remains responsive across different devices.
 
-```bash
-npm run dev
+## 🚀 Features
+
+- 🔍 **Product List View** – Display products with multiple filtering and search criteria.
+- 📱 **Responsive Design** – Optimized for mobile, tablet, and desktop screens.
+- ⚡ **Fast & Efficient** – Uses SWR for data fetching and caching.
+- ✅ **Well-Structured Codebase** – Organized folder structure for scalability.
+- 🛠 **Tested with Jest** – Covered >90% Unit Test coverage.
+
+## 🏗️ Tech Stack
+
+- **Next.js** – Server-side rendering and performance optimizations.
+- **Ant Design (antd)** – UI components for a polished design.
+- **SWR** – Data fetching and caching for better performance.
+- **Jest** – Unit and integration testing.
+- **JSON-Server** – Mock API for backend data.
+
+## 🌐 Deployment
+
+- **Frontend:** Deployed using **Vercel** – the best deployment tool for Next.js projects -> [https://tymex-interview-frontend-le-dao-ngoc-tuan.vercel.app/](https://tymex-interview-frontend-le-dao-ngoc-tuan.vercel.app/)
+- **Backend:** JSON-server mock API deployed on **Render**:  
+  [https://tymex-mock-server.onrender.com/](https://tymex-mock-server.onrender.com/)
+
+## 📥 Installation & Setup
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/tuanle4118/tymex-interview-frontend-LeDaoNgocTuan.git
+   cd tymex-interview-frontend-LeDaoNgocTuan
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   # or
+   yarn install
+   ```
+3. Run the development server:
+   ```sh
+   npm run dev
+   # or
+   yarn dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 🧪 Running Tests
+
+Run Jest tests:
+
+```sh
+npm test
 # or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📂 Folder Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+/app
+  ├── (home)/          # Main page
+  ├── components/      # Reusable UI components
+      ├── __test__/    # Test cases for components
+  ├── contexts/        # Global state management using Context API
+  ├── definitions/     # Common definitions like interfaces, constant,...
+  ├── hooks/           # Custom React hooks
+      ├── __test__/    # Test cases for hooks
+  ├── lib/             # Utility functions and third-party integrations
+  ├── styles/          # Component module styles
+  ├── ui/              # Main UI components
+      ├── __test__/    # Test cases for main UI
+  ├── utils/           # Utility functions
+      ├── __test__/    # Test cases for util functions
+```
