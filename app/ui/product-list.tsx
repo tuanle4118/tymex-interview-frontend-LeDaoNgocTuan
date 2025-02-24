@@ -51,11 +51,6 @@ export default function ProductList() {
   const [isClient, setIsClient] = useState(false); // Prevent hydration mismatch
   const [newItemCount, setNewItemCount] = useState(0); // Track new items being loaded
 
-  const filterTagParams = selectedTags
-    .filter((tag) => tag !== "All")
-    .map((tag) => `category=${tag}`)
-    .join("&");
-
   const queryUrl = useMemo(() => {
     const {
       price,
@@ -80,6 +75,12 @@ export default function ProductList() {
       theme_like: theme || "",
     });
 
+    selectedTags
+      .filter((tag) => tag !== "All")
+      .forEach((tag) => {
+        queryParams.set("category", tag);
+      });
+
     const sortFields = [
       time ? "createdBy" : null,
       price ? "price" : null,
@@ -92,7 +93,7 @@ export default function ProductList() {
     url.search = queryParams.toString();
 
     return url;
-  }, [filterData, filterTagParams, page]);
+  }, [filterData, selectedTags, page]);
 
   const { data, error, isLoading } = useSWR(queryUrl, fetcher);
 
