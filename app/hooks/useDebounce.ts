@@ -1,20 +1,45 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
-function debounce<T extends (...args: unknown[]) => void>(
+function debounce<T extends (...args: Parameters<T>) => void>(
   func: T,
   delay: number = 300,
-): (...args: Parameters<T>) => void {
+) {
   let timer: ReturnType<typeof setTimeout>;
 
-  return (...args: Parameters<T>) => {
+  const debouncedFunction = (...args: Parameters<T>) => {
     clearTimeout(timer);
     timer = setTimeout(() => func(...args), delay);
   };
+
+  debouncedFunction.cancel = () => {
+    clearTimeout(timer);
+  };
+
+  return debouncedFunction;
 }
 
-export function useDebounce<T extends (...args: unknown[]) => void>(
+export function useDebounce<T extends (...args: Parameters<T>) => void>(
   callback: T,
   delay: number = 300,
 ): (...args: Parameters<T>) => void {
-  return useCallback(debounce(callback, delay), [callback, delay]);
+  const callbackRef = useRef(callback);
+
+  useEffect(() => {
+    callbackRef.current = callback;
+  }, [callback]);
+
+  const debouncedFunction = useCallback(
+    debounce((...args: Parameters<T>) => {
+      callbackRef.current(...args);
+    }, delay),
+    [delay],
+  );
+
+  useEffect(() => {
+    return () => {
+      debouncedFunction.cancel?.(); // Ensure cleanup on unmount
+    };
+  }, [debouncedFunction]);
+
+  return debouncedFunction;
 }

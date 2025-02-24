@@ -50,6 +50,7 @@ export default function Header() {
       </nav>
 
       <MenuOutlined
+        data-testid="menu-dropdown"
         className="relative flex h-12 w-12 items-center justify-center text-4xl text-white lg:hidden"
         onClick={() => setOpen(true)}
       />
@@ -61,7 +62,10 @@ export default function Header() {
           trigger={["click"]}
           placement="bottomRight"
         >
-          <div className="flex cursor-pointer items-center gap-2 space-x-1 text-white">
+          <div
+            data-testid="language-dropdown"
+            className="flex cursor-pointer items-center gap-2 space-x-1 text-white"
+          >
             <GlobalOutlined className="text-xl" />
             <DownOutlined className="text-sm" />
           </div>
@@ -70,6 +74,7 @@ export default function Header() {
 
       {/* Custom Expanding Menu */}
       <div
+        data-testid="expanding-menu"
         ref={menuRef}
         aria-hidden={!open}
         className={`fixed left-6 top-20 w-72 rounded-3xl bg-gray-800/90 p-6 text-white shadow-2xl backdrop-blur-md transition-all duration-500 ease-in-out ${open ? "visible scale-100 opacity-100" : "invisible scale-90 opacity-0"}`}

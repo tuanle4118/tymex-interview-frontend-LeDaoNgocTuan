@@ -305,7 +305,10 @@ function ProductInformation({ product }: { product: IProduct }) {
 
 function ProductCardSkeleton() {
   return (
-    <Card className="h-96 border-none bg-[#3A384199]">
+    <Card
+      data-testid="loading-skeleton"
+      className="h-96 border-none bg-[#3A384199]"
+    >
       <div className="grid gap-5">
         <Skeleton.Image style={{ width: "15rem", height: "15rem" }} active />
         <Skeleton active paragraph={{ rows: 2 }} />
