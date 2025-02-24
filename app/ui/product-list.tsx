@@ -7,7 +7,7 @@ import {
   HeartFilled,
   HeartOutlined,
 } from "@ant-design/icons";
-import { Avatar, Badge, Card, Col, Flex, Row, Tag } from "antd";
+import { Avatar, Badge, Card, Col, Flex, Row, Skeleton, Tag } from "antd";
 import Image from "next/image";
 import { useContext, useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
@@ -47,7 +47,9 @@ export default function ProductList() {
   const [page, setPage] = useState(1);
   const [selectedTags, setSelectedTags] = useState<string[]>(["All"]);
   const [products, setProducts] = useState<IProduct[]>([]);
-  const [isLoadMore, setIsLoadMore] = useState(false);
+  const [isLoadMore, setIsLoadMore] = useState(false); // Track if user clicked view more
+  const [isClient, setIsClient] = useState(false); // Prevent hydration mismatch
+  const [newItemCount, setNewItemCount] = useState(0); // Track new items being loaded
 
   const filterTagParams = selectedTags
     .filter((tag) => tag !== "All")
@@ -67,6 +69,7 @@ export default function ProductList() {
 
     if (!isLoadMore) setPage(filterPage);
 
+    const url = new URL("/products", baseUrl);
     const queryParams = new URLSearchParams({
       _limit: "20",
       _page: String(page),
@@ -85,9 +88,10 @@ export default function ProductList() {
     const orderFields = [time, price].filter(Boolean);
 
     if (sortFields.length) queryParams.set("_sort", sortFields.join(","));
-    if (orderFields.length) queryParams.set("order", orderFields.join(","));
+    if (orderFields.length) queryParams.set("_order", orderFields.join(","));
+    url.search = queryParams.toString();
 
-    return `${baseUrl}/products?${queryParams.toString()}&${filterTagParams}`;
+    return url;
   }, [filterData, filterTagParams, page]);
 
   const { data, error, isLoading } = useSWR(queryUrl, fetcher);
@@ -99,9 +103,16 @@ export default function ProductList() {
       setProducts((prevProducts) =>
         isLoadMore ? [...prevProducts, ...data.data] : data.data,
       );
+      setNewItemCount(isLoadMore ? data.data.length : 0);
       setIsLoadMore(false);
     }
   }, [data]);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) return null; // Avoid hydration mismatch in Next.js
 
   if (error) {
     return <div className="w-full text-center text-white">Error occurs</div>;
@@ -145,35 +156,11 @@ export default function ProductList() {
         ))}
       </Flex>
 
-      {products.length ? (
-        <div
-          className={`max-h-[130rem] overflow-y-auto overflow-x-hidden ${Styles.customScrollbar}`}
-        >
-          <Row
-            justify={"center"}
-            gutter={[
-              { xs: 10, sm: 20, xl: 40 },
-              { xs: 10, sm: 20, xl: 40 },
-            ]}
-          >
-            {products?.map((product) => (
-              <Col key={product.id} className="gutter-row">
-                <Card className="h-96 border-none bg-[#3A384199]">
-                  <div className="grid gap-5">
-                    <CharacterImage product={product} />
-                    <ProductInformation product={product} />
-                  </div>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </div>
-      ) : (
-        <span className="m-10 grid place-content-center gap-5">
-          <ExclamationCircleOutlined className="text-7xl text-primary" />
-          <span className="text-xl text-gray-400"> No Data</span>
-        </span>
-      )}
+      <ProductGrid
+        products={products}
+        newItemCount={newItemCount}
+        isLoading={isLoading}
+      />
 
       <GlowingButton
         onClick={handleLoadMore}
@@ -184,6 +171,47 @@ export default function ProductList() {
         disabled={page >= totalPages}
         loading={isLoading}
       />
+    </div>
+  );
+}
+
+function ProductGrid({
+  products,
+  newItemCount = 20,
+  isLoading,
+}: {
+  products: IProduct[];
+  newItemCount: number;
+  isLoading: boolean;
+}) {
+  return !isLoading && !products.length ? (
+    <span className="m-10 grid place-content-center gap-5">
+      <ExclamationCircleOutlined className="text-7xl text-primary" />
+      <span className="text-xl text-gray-400">No Data</span>
+    </span>
+  ) : (
+    <div
+      className={`max-h-[130rem] overflow-y-auto overflow-x-hidden ${Styles.customScrollbar}`}
+    >
+      <Row justify="center" gutter={[10, 20]}>
+        {products.map((product) => (
+          <Col key={product.id}>
+            <Card className="h-96 border-none bg-[#3A384199]">
+              <div className="grid gap-5">
+                <CharacterImage product={product} />
+                <ProductInformation product={product} />
+              </div>
+            </Card>
+          </Col>
+        ))}
+
+        {isLoading &&
+          Array.from({ length: newItemCount || 20 }).map((_, index) => (
+            <Col key={`skeleton-${index}`}>
+              <ProductCardSkeleton />
+            </Col>
+          ))}
+      </Row>
     </div>
   );
 }
@@ -272,5 +300,16 @@ function ProductInformation({ product }: { product: IProduct }) {
         <span className="cursor-pointer text-nowrap text-white hover:underline">{`${product.author.firstName} ${product.author.lastName}`}</span>
       </section>
     </>
+  );
+}
+
+function ProductCardSkeleton() {
+  return (
+    <Card className="h-96 border-none bg-[#3A384199]">
+      <div className="grid gap-5">
+        <Skeleton.Image style={{ width: "15rem", height: "15rem" }} active />
+        <Skeleton active paragraph={{ rows: 2 }} />
+      </div>
+    </Card>
   );
 }

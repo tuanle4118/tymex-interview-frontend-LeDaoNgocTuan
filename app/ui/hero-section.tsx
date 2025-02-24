@@ -58,7 +58,7 @@ function CharacterList() {
   ];
 
   return (
-    <div className="w-2/3">
+    <div className="flex h-full w-2/3 items-center justify-center md:justify-start">
       <div className="hidden h-[10.5rem] w-[15.5rem] md:block xl:hidden">
         <div className="relative">
           <Carousel
@@ -75,7 +75,7 @@ function CharacterList() {
         </div>
       </div>
 
-      <div className="flex h-full w-full flex-col items-start justify-around md:hidden lg:flex-row lg:items-center xl:flex">
+      <div className="flex h-full w-full flex-col items-start justify-around sm:items-center md:hidden lg:flex-row xl:flex">
         {characterList.map((character) => (
           <CharacterGroup key={character.title} characterInfo={character} />
         ))}

@@ -9,6 +9,7 @@ import { ConfigProvider } from "antd";
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./ui/header";
+import Footer from "./ui/footer";
 
 export const metadata: Metadata = {
   title: "Tymex MarketPlace",
@@ -31,6 +32,7 @@ export default function RootLayout({
         <body className="font-interSans antialiased">
           <Header />
           {children}
+          <Footer />
         </body>
       </ConfigProvider>
     </html>

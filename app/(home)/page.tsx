@@ -1,9 +1,8 @@
-import Image from "next/image";
-import ProductList from "@/app/ui/product-list";
-import ProductFilterPanel from "@/app/ui/product-filter-panel";
 import HeroSection from "@/app/ui/hero-section";
+import ProductFilterPanel from "@/app/ui/product-filter-panel";
+import ProductList from "@/app/ui/product-list";
 import BottomImg from "@/public/bottom-image.svg";
-import Footer from "@/app/ui/footer";
+import Image from "next/image";
 import { FilterDataProvider } from "../contexts/FilterProductContext";
 
 export default function HomePage() {
@@ -26,9 +25,6 @@ export default function HomePage() {
           <Image src={BottomImg} alt="bottom-img" />
         </div>
       </main>
-      <footer>
-        <Footer />
-      </footer>
     </div>
   );
 }
