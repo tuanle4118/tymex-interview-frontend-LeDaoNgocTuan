@@ -8,10 +8,12 @@ For the best experience, use a screen resolution of **1920x1080**. The design is
 ## 🚀 Features
 
 - 🔍 **Product List View** – Display products with multiple filtering and search criteria.
+- ⏳ **Debounce Search & Filters** – Optimized search experience with debounce to reduce API calls.
+- 🖼️ **Loading Skeleton** – Smooth UI experience while fetching data.
 - 📱 **Responsive Design** – Optimized for mobile, tablet, and desktop screens.
 - ⚡ **Fast & Efficient** – Uses SWR for data fetching and caching.
 - ✅ **Well-Structured Codebase** – Organized folder structure for scalability.
-- 🛠 **Tested with Jest** – Covered >90% Unit Test coverage.
+- 🛠 **Tested with Jest** – Ensures reliability through unit and integration tests.
 
 ## 🏗️ Tech Stack
 
@@ -56,6 +58,26 @@ Run Jest tests:
 npm test
 # or
 yarn test
+```
+
+### 🔎 Checking Unit Test Coverage
+
+To check the test coverage, run:
+
+```sh
+npm run test -- --coverage
+# or
+yarn test --coverage
+```
+
+This will generate a coverage report in the terminal and a detailed HTML report inside the `coverage/` folder.
+
+To open the HTML report:
+
+```sh
+open coverage/lcov-report/index.html  # macOS
+xdg-open coverage/lcov-report/index.html  # Linux
+start coverage\lcov-report\index.html  # Windows
 ```
 
 ## 📂 Folder Structure
